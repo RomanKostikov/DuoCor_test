@@ -1,0 +1,75 @@
+.room-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.room-container h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.room-container button {
+    display: block;
+    margin: 0 auto 20px;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.room-container button:hover {
+    background-color: #45a049;
+}
+
+.workplace-item {
+    margin: 20px 0;
+    padding: 15px;
+    border-left: 4px solid #4CAF50;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    list-style-type: none; /* Убираем точку перед каждым рабочим местом */
+}
+
+.workplace-item h3 {
+    margin: 0;
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.workplace-item p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 16px;
+}
+
+.workplace-item form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.workplace-item button {
+    align-self: flex-start; /* Чтобы кнопка была смещена вниз и слева */
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.workplace-item button:hover {
+    background-color: #45a049;
+}

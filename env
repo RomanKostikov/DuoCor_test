@@ -1,0 +1,23 @@
+# Database configuration
+POSTGRES_DB=mydb
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=Joker777
+
+# Django superuser credentials
+DJANGO_SUPERUSER_USERNAME=admin
+DJANGO_SUPERUSER_PASSWORD=live5913
+DJANGO_SUPERUSER_EMAIL=admin@example.com
+
+# JWT token settings
+ACCESS_TOKEN_LIFETIME=1  # Время жизни access-токена в часах
+REFRESH_TOKEN_LIFETIME=7  # Время жизни refresh-токена в днях
+
+# Django settings
+DJANGO_SECRET_KEY=django-insecure-tx1x14@j*0=2r#u*zuh164&0ik+^u$0*1y&vk6$=&)syg#+0im
+DJANGO_DEBUG=True
+DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,web
+
+# React frontend
+# для проверки в браузере(оставить по умолчанию)
+REACT_APP_API_URL=http://localhost:8000/api
+
