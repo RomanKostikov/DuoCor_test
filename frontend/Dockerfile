@@ -1,14 +1,14 @@
 # Указываем базовый образ Node.js
-FROM node:16
+FROM node:18
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
 # Копируем package.json и package-lock.json
-COPY package*.json ./
+#COPY package*.json ./
 
 # Устанавливаем только продакшн-зависимости
-RUN npm ci --only=production
+#RUN npm ci --only=production
 
 # Копируем остальной код приложения
 COPY . .
@@ -20,5 +20,5 @@ EXPOSE 3000
 ENV NODE_ENV=production
 
 # Запускаем приложение
-CMD ["npm", "start"]
+CMD npm install --force && npm start
 

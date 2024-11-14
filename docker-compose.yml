@@ -43,8 +43,6 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     env_file: .env
-    volumes:
-      - ./frontend:/app
     ports:
       - "3000:3000"
     environment:
