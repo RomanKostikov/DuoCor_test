@@ -5,12 +5,13 @@ import Register from './components/Register';
 import Auth from './components/Auth';
 import OfficeList from './components/OfficeList';
 import Room from './components/Room';
+import NotFound from './components/NotFound';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const checkAuthStatus = async () => {
@@ -27,7 +28,7 @@ function App() {
           handleLogout();
         }
       }
-      setIsLoading(false); // Снимаем состояние загрузки после проверки
+      setIsLoading(false);
     };
 
     checkAuthStatus();
@@ -47,7 +48,7 @@ function App() {
 
   const ProtectedRoute = ({ children }) => {
     if (isLoading) {
-      return <p>Загрузка...</p>; // Показываем индикатор загрузки, пока идет проверка
+      return <p>Загрузка...</p>;
     }
     return isAuthenticated ? children : <Navigate to="/login" />;
   };
@@ -58,10 +59,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to={isAuthenticated ? "/offices" : "/login"} />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/login"
-            element={<Auth onLogin={handleLogin} />}
-          />
+          <Route path="/login" element={<Auth onLogin={handleLogin} />} />
           <Route
             path="/offices"
             element={
@@ -78,6 +76,8 @@ function App() {
               </ProtectedRoute>
             }
           />
+          {/* Маршрут для обработки ошибки 404 */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>

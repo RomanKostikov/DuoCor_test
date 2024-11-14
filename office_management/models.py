@@ -4,6 +4,18 @@ import pytz
 
 
 # Create your models here.
+
+# Чтобы в админке было легче разобраться можно добавить verbose_name
+# class Office(models.Model):
+#     name = models.CharField(max_length=100, verbose_name="Название офиса")
+#     address = models.CharField(max_length=255, verbose_name="Адрес")
+#
+#     class Meta:
+#         verbose_name = "Офис"
+#         verbose_name_plural = "Офисы"
+#
+#     def __str__(self):
+#         return self.name
 class Office(models.Model):
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)

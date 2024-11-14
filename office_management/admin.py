@@ -20,3 +20,10 @@ admin.site.register(Office)
 admin.site.register(Room)
 admin.site.register(Workplace)
 admin.site.register(Booking, BookingAdmin)
+
+# Чтобы использовать новые verbose_name в админке, убедитесь, что ваши модели зарегистрированы
+# следующим образом:
+# @admin.register(Office)
+# class OfficeAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'address')
+#     search_fields = ('name', 'address')

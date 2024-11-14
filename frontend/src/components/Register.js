@@ -13,6 +13,7 @@ function Register() {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
 
   const handleChange = (e) => {
@@ -23,45 +24,86 @@ function Register() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.password_confirm) {
-      setErrorMessage("Passwords do not match.");
+      setErrorMessage("Пароли не совпадают.");
       return;
     }
 
-    axios.post(`${API_URL}/accounts/register/`, formData)
-      .then(response => {
-        setSuccessMessage("Registration successful! You can now log in.");
-        setErrorMessage('');
-        setFormData({
-          username: '',
-          email: '',
-          password: '',
-          password_confirm: '',
-        });
+    try {
+      const response = await axios.post(`${API_URL}/accounts/register/`, formData);
+      setSuccessMessage("Регистрация прошла успешно! Вы можете войти в систему.");
+      setErrorMessage('');
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    } catch (error) {
+      if (error.response && error.response.data) {
+        const errors = error.response.data;
+        handleErrors(errors);
+      } else {
+        setErrorMessage("Не удалось зарегистрироваться. Пожалуйста, попробуйте снова.");
+      }
+    }
+  };
 
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-      })
-      .catch(error => {
-        const message = error.response?.data
-          ? JSON.stringify(error.response.data)
-          : "Registration failed. Please check your details and try again.";
-        setErrorMessage(message);
-      });
+  const handleErrors = (errors) => {
+    let translatedErrors = [];
+    if (errors.username) {
+      translatedErrors.push(`Имя пользователя: ${translateUsernameErrors(errors.username)}`);
+    }
+    if (errors.email) {
+      translatedErrors.push(`Email: ${translateEmailErrors(errors.email)}`);
+    }
+    if (errors.password) {
+      translatedErrors.push(`Пароль: ${translatePasswordErrors(errors.password)}`);
+    }
+    setErrorMessage(translatedErrors.join('. '));
+  };
+
+  const translateUsernameErrors = (usernameErrors) => {
+    return usernameErrors.map((error) => {
+      if (error.includes("A user with that username already exists")) {
+        return "Пользователь с таким именем уже существует.";
+      }
+      return error;
+    }).join(', ');
+  };
+
+  const translateEmailErrors = (emailErrors) => {
+    return emailErrors.map((error) => {
+      if (error.includes("Enter a valid email address")) {
+        return "Введите правильный адрес электронной почты.";
+      }
+      return error;
+    }).join(', ');
+  };
+
+  const translatePasswordErrors = (passwordErrors) => {
+    return passwordErrors.map((error) => {
+      if (error.includes("This password is too short")) {
+        return "Пароль слишком короткий. Должен содержать не менее 8 символов.";
+      }
+      if (error.includes("This password is too common")) {
+        return "Пароль слишком простой. Пожалуйста, используйте более сложный пароль.";
+      }
+      if (error.includes("This password is entirely numeric")) {
+        return "Пароль не может состоять только из цифр.";
+      }
+      return error;
+    }).join(', ');
   };
 
   return (
     <div className="register-container">
-      <h2>Register</h2>
+      <h2>Регистрация</h2>
       {successMessage && <p className="success-message">{successMessage}</p>}
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Username:</label>
+          <label>Имя пользователя:</label>
           <input
             type="text"
             name="username"
@@ -81,7 +123,7 @@ function Register() {
           />
         </div>
         <div>
-          <label>Password:</label>
+          <label>Пароль:</label>
           <input
             type="password"
             name="password"
@@ -91,7 +133,7 @@ function Register() {
           />
         </div>
         <div>
-          <label>Confirm Password:</label>
+          <label>Подтвердите пароль:</label>
           <input
             type="password"
             name="password_confirm"
@@ -100,7 +142,7 @@ function Register() {
             required
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit">Зарегистрироваться</button>
       </form>
     </div>
   );

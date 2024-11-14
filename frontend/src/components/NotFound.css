@@ -1,0 +1,49 @@
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.not-found-content {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+}
+
+.not-found-title {
+  font-size: 120px;
+  font-weight: bold;
+  color: #ff4040;
+  margin: 0;
+}
+
+.not-found-message {
+  font-size: 24px;
+  margin: 20px 0;
+  color: #333;
+}
+
+.not-found-content p {
+  font-size: 16px;
+  color: #666;
+}
+
+.back-home-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #4CAF50;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.back-home-button:hover {
+  background-color: #388e3c;
+}

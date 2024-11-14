@@ -112,8 +112,12 @@ docker-compose run frontend sh
 ```bash
 npm cache clean --force
 rm -rf node_modules
+```
+
+```bash
 npm install
 ```
+
 Используйте относительный путь для запуска:
 
 Попробуйте запустить react-scripts напрямую, указав путь до него:
